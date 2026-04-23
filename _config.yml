@@ -5,8 +5,7 @@ baseurl: ""
 
 theme: minima
 
-author:
-  name: Daniel King
+author: Daniel King
 
 minima:
   social_links:
