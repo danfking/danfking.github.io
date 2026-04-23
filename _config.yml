@@ -13,7 +13,6 @@ minima:
     - { platform: devto, user_url: "https://dev.to/danfking" }
 
 header_pages:
-  - _pages/projects.md
   - _pages/about.md
 
 defaults:
