@@ -7,4 +7,4 @@ Full-stack engineer orchestrating teams of people and agents. Writing about agen
 
 I'm interested in what becomes possible when you pair an experienced developer with AI tooling that actually fits into a real workflow.
 
-You can find me on [GitHub](https://github.com/danfking) and [dev.to](https://dev.to/danfking).
+You can find me on [GitHub](https://github.com/danfking), [dev.to](https://dev.to/danfking), and [LinkedIn](https://www.linkedin.com/in/danfking/).
