@@ -21,8 +21,8 @@
 }
 
 // Stop content area from filling entire viewport height
-.page-content {
-  flex: none;
+main.page-content {
+  flex: none !important;
   padding-bottom: 15px;
 }
 
