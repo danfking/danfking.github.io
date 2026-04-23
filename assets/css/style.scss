@@ -20,6 +20,12 @@
   border-top: 1px solid #e8e8e8;
 }
 
+// Stop content area from filling entire viewport height
+.page-content {
+  flex: none;
+  padding-bottom: 15px;
+}
+
 // Tighten up footer spacing
 .site-footer {
   padding: 15px 0;
@@ -27,11 +33,6 @@
 
 .footer-heading {
   margin-bottom: 8px;
-}
-
-// Remove the large gap above footer
-.page-content {
-  padding-bottom: 15px;
 }
 
 // Inline code styling
