@@ -1,15 +1,17 @@
-title: Dan King
-description: Software engineer. Building games, tools, and strange creatures.
+title: Daniel King
+description: Full-stack engineer orchestrating teams of people and agents. Writing about agentic development, developer tools, and MCP. Australia.
 url: "https://danfking.github.io"
 baseurl: ""
 
 theme: minima
 
 author:
-  name: Dan King
-  email: danfking@gmail.com
+  name: Daniel King
 
-github_username: danfking
+minima:
+  social_links:
+    - { platform: github, user_url: "https://github.com/danfking" }
+    - { platform: devto, user_url: "https://dev.to/danfking" }
 
 header_pages:
   - _pages/projects.md
