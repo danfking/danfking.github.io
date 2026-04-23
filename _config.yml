@@ -1,0 +1,31 @@
+title: Dan King
+description: Software engineer. Building games, tools, and strange creatures.
+url: "https://danfking.github.io"
+baseurl: ""
+
+theme: minima
+
+author:
+  name: Dan King
+  email: danfking@gmail.com
+
+github_username: danfking
+
+header_pages:
+  - _pages/projects.md
+  - _pages/about.md
+
+defaults:
+  - scope:
+      path: "_pages"
+    values:
+      layout: page
+
+permalink: /blog/:year/:month/:day/:title/
+
+include:
+  - _pages
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

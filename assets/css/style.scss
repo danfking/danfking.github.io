@@ -1,0 +1,29 @@
+---
+---
+
+@import "minima";
+
+// Slightly wider content area
+.wrapper {
+  max-width: 48rem;
+}
+
+// More breathing room between posts on the home page
+.post-list > li {
+  margin-bottom: 2rem;
+}
+
+// Project page horizontal rules
+.page-content hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+// Inline code styling
+code.highlighter-rouge {
+  background: #f4f4f4;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
