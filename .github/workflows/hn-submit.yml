@@ -1,0 +1,102 @@
+name: Submit Show HN to Hacker News
+
+# Two ways this fires:
+#   1. Cron at 23:30 UTC on May 3 — 30 min early so the script can wait
+#      precisely until 00:00 UTC on Monday May 4 (the slot the analysis
+#      identifies as optimal). The 30-min lead absorbs GitHub Actions'
+#      cron drift, which can be 5-15 minutes during peak hours.
+#   2. workflow_dispatch — manual trigger, defaults to dry-run for
+#      pre-flight rehearsals. Uncheck dry_run to do a real submit on demand.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Walk through the form but do not click submit"
+        type: boolean
+        default: true
+      submit_now:
+        description: "Submit immediately, ignoring TARGET_TIME_UTC"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "30 23 3 5 *"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    env:
+      HN_COOKIE: ${{ secrets.HN_COOKIE }}
+      HN_USERNAME: ${{ secrets.HN_USERNAME }}
+      HN_TITLE: ${{ secrets.HN_TITLE }}
+      POST_URL: ${{ secrets.POST_URL }}
+      TARGET_TIME_UTC: "2026-05-04T00:00:00Z"
+      DRY_RUN: ${{ inputs.dry_run == true && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('scripts/hn-submit/package.json') }}
+
+      - name: Install dependencies
+        working-directory: scripts/hn-submit
+        run: npm install
+
+      - name: Install Playwright Chromium
+        working-directory: scripts/hn-submit
+        run: npx playwright install --with-deps chromium
+
+      - name: Override target time for immediate dispatch runs
+        if: ${{ inputs.submit_now == true || inputs.dry_run == true }}
+        run: echo "TARGET_TIME_UTC=" >> $GITHUB_ENV
+
+      - name: Submit
+        id: submit
+        working-directory: scripts/hn-submit
+        run: node submit.js
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hn-submit-screenshots
+          path: ${{ runner.temp }}/hn-submit-*.png
+          if-no-files-found: ignore
+
+      - name: Open issue with result
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          OUTCOME: ${{ steps.submit.outputs.outcome }}
+          HN_URL: ${{ steps.submit.outputs.hn_url }}
+        with:
+          script: |
+            const outcome = process.env.OUTCOME || 'failed';
+            const hnUrl = process.env.HN_URL || '(not detected)';
+            const dryRun = process.env.DRY_RUN === 'true';
+            const titlePrefix = dryRun ? 'HN dry-run' : 'HN submission';
+            const title = `${titlePrefix}: ${outcome}`;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = [
+              `**Outcome:** \`${outcome}\``,
+              `**HN URL:** ${hnUrl}`,
+              `**Workflow run:** ${runUrl}`,
+              dryRun ? '\n_This was a dry-run; nothing was actually submitted._' : '',
+            ].filter(Boolean).join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+            });
