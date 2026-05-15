@@ -1,8 +1,8 @@
-<footer class="site-footer h-card">
-  <data class="u-url" value="{{ "/" | relative_url }}"></data>
-
-  <div class="wrapper">
-    <p class="footer-description">{{ site.description | escape }}</p>
-  </div>
-
+<footer>
+  <p>
+    {% for link in site.social_links %}
+      <a href="{{ link.url }}">{{ link.name }}</a>{% unless forloop.last %} &middot; {% endunless %}
+    {% endfor %}
+  </p>
+  <p>&copy; {{ site.time | date: '%Y' }} {{ site.author | default: site.title }}</p>
 </footer>
