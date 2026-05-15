@@ -1,46 +1,178 @@
 ---
 ---
 
-@import "minima";
-
-// Slightly wider content area
-.wrapper {
-  max-width: 48rem;
+:root {
+    --width: 720px;
+    --font-main: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+    --font-secondary: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+    --font-scale: 1em;
+    --background-color: #1c1f1a;
+    --heading-color: #98C379;
+    --text-color: #98C379;
+    --link-color: #98C379;
+    --visited-color: #6f8f5a;
+    --code-background-color: #98C379;
+    --code-color: #1c1f1a;
 }
 
-// More breathing room between posts on the home page
-.post-list > li {
-  margin-bottom: 2rem;
+body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
 }
 
-// Project page horizontal rules
-.page-content hr {
-  margin: 2rem 0;
-  border: 0;
-  border-top: 1px solid #e8e8e8;
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
 }
 
-// Stop content area from filling entire viewport height
-main.page-content {
-  flex: none !important;
-  padding-bottom: 15px;
+a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-// Tighten up footer spacing
-.site-footer {
-  padding: 15px 0;
+a:hover {
+    text-decoration: underline;
 }
 
-.footer-description {
-  color: #828282;
-  font-size: 15px;
-  margin: 0;
+main {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 30px;
+    border: 1px solid var(--link-color);
+    line-height: 1.6;
 }
 
-// Inline code styling
-code.highlighter-rouge {
-  background: #f4f4f4;
-  padding: 0.15em 0.4em;
-  border-radius: 3px;
-  font-size: 0.9em;
+nav a {
+    margin-right: 8px;
+}
+
+strong, b {
+    color: var(--heading-color);
+}
+
+button {
+    margin: 0;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px dashed var(--heading-color);
+    padding: 10px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px dashed;
+}
+
+img {
+    max-width: 100%;
+}
+
+code {
+    font-family: monospace;
+    padding: 2px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+}
+
+blockquote {
+    border-top: 1px solid var(--heading-color);
+    border-bottom: 1px solid var(--heading-color);
+    color: var(--text-color);
+    padding: 20px;
+    font-style: italic;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+footer {
+    padding: 25px 0;
+    text-align: center;
+    opacity: 0.6;
+}
+
+.title:hover {
+    text-decoration: none;
+}
+
+.title h1 {
+    font-size: 1em;
+    padding: 5px 10px;
+    background: var(--heading-color);
+    color: var(--background-color);
+    display: inline-block;
+    font-weight: 400;
+}
+
+.inline {
+    width: auto !important;
+}
+
+.highlight, .code {
+    padding: 1px 15px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+}
+
+.highlight {
+    border-left: 5px solid var(--heading-color);
+}
+
+ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+}
+
+ul.blog-posts li {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+ul.blog-posts li time {
+    font-style: normal;
+}
+
+ul.blog-posts li span {
+    flex: 0 0 130px;
+}
+
+ul.blog-posts li a:visited {
+    color: var(--visited-color);
+}
+
+@media only screen and (max-width: 767px) {
+    main {
+        padding: 20px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    ul.blog-posts li {
+        flex-direction: column;
+    }
+
+    ul.blog-posts li span {
+        flex: unset;
+    }
 }

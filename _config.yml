@@ -3,14 +3,12 @@ description: Full-stack engineer orchestrating teams of people and agents. Writi
 url: "https://danfking.github.io"
 baseurl: ""
 
-theme: minima
-
 author: Daniel King
 
-minima:
-  social_links:
-    - { platform: github, user_url: "https://github.com/danfking" }
-    - { platform: devto, user_url: "https://dev.to/danfking" }
+social_links:
+  - { name: GitHub, url: "https://github.com/danfking" }
+  - { name: dev.to, url: "https://dev.to/danfking" }
+  - { name: LinkedIn, url: "https://www.linkedin.com/in/danfking/" }
 
 header_pages:
   - _pages/about.md
