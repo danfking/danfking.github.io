@@ -1,6 +1,6 @@
 ---
 title: "I trained a sprite model with agents. The data was the bottleneck."
-published: false
+published: true
 description: A 2.9M-parameter sprite-art transformer built end-to-end with agents, and what its failure mode says about agentic ML loops.
 tags: ai, machinelearning, agents, pixelart
 canonical_url: https://danfking.github.io/blog/2026/05/06/data-was-the-bottleneck/
