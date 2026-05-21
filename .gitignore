@@ -5,3 +5,6 @@ _site/
 vendor/
 .bundle/
 Gemfile.lock
+
+# Local scratch: HN submission comment text, not a post to publish
+_posts/hn-submission-text.txt
